@@ -9,5 +9,23 @@ export const getAllProducts = catchAsyncError(async (req, res, next) => {
     return next(new errorHandler(`You don't have any product registered`, 404));
   }
 
-  res.status(200).json(products);
+  const formattedProducts = products.map((product) => ({
+    id: product._id,
+    title: product.title,
+    images: [
+      {
+        url: product.url,
+        thumbnailUrl: product.thumbnailUrl,
+      },
+    ],
+    price: product.price,
+    categoryId: product.categoryId,
+    userId: product.userId,
+    location: {
+      latitude: product.Latitude,
+      longitude: product.Longitude,
+    },
+  }));
+
+  res.status(200).json(formattedProducts);
 });

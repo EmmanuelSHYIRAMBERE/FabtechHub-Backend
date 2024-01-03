@@ -12,7 +12,8 @@ const productsRouter = express.Router();
  *       type: object
  *       required:
  *         - title
- *         - productImage
+ *         - url
+ *         - thumbnailUrl
  *         - price
  *         - categoryId
  *         - userId
@@ -22,10 +23,14 @@ const productsRouter = express.Router();
  *         title:
  *           type: string
  *           description: The title of the product
- *         productImage:
+ *         url:
  *           type: string
  *           format: binary
- *           description: The product image
+ *           description: The product image url
+ *         thumbnailUrl:
+ *           type: string
+ *           format: binary
+ *           description: The product image thumbnailUrl
  *         price:
  *           type: string
  *           description: The price of the product
@@ -43,7 +48,8 @@ const productsRouter = express.Router();
  *           description: The Latitude of the user location
  *       example:
  *         title: "Red jacket"
- *         productImage: "jacket.jpg"
+ *         url: "jacket.jpg"
+ *         thumbnailUrl: "jacket.jpg"
  *         price: 100
  *         categoryId: 5
  *         userId: 1

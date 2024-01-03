@@ -5,7 +5,11 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  productImage: {
+  url: {
+    type: String,
+    required: true,
+  },
+  thumbnailUrl: {
     type: String,
     required: true,
   },

@@ -21,6 +21,9 @@ const upload = multer({
   },
 });
 
-const productImagesUpload = upload.single("productImage");
+const productImagesUpload = upload.fields([
+  { name: "url", maxCount: 3 },
+  { name: "thumbnailUrl", maxCount: 3 },
+]);
 
 export default productImagesUpload;

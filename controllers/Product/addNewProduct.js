@@ -3,15 +3,15 @@ import cloudinary from "../../utilities/cloudinary";
 import { Product } from "../../model/productModel.js";
 
 export const addNewProduct = catchAsyncError(async (req, res, next) => {
-  let productImage = "";
-
-  if (req.file) {
-    productImage = await cloudinary.uploader.upload(req.file.path);
-  }
+  const url = await cloudinary.uploader.upload(req.files["url"][0].path);
+  const thumbnailUrl = await cloudinary.uploader.upload(
+    req.files["thumbnailUrl"][0].path
+  );
 
   const product = await Product.create({
     ...req.body,
-    productImage: productImage.secure_url,
+    url: url.secure_url,
+    thumbnailUrl: thumbnailUrl.secure_url,
   });
 
   return res.status(201).json({
