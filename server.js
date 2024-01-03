@@ -1,65 +1,56 @@
 import express from "express";
 import bodyParser from "body-parser";
-import users from "./users";
+import cors from "cors";
+import "dotenv/config";
 import mongoose from "mongoose";
-import { User } from "./model/userModel";
+import morgan from "morgan";
+import swaggerUI from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import systemRouter from "./routes";
 
 const app = express();
 
+const PORT = process.env.PORT;
+
+const options = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "AguraMarket-Project API Documentation",
+      version: "1.0.0",
+      description:
+        "This AguraMarket-Project API Documentation is designed to provide basics of how this API functions.",
+    },
+    servers: [
+      {
+        url: "http://localhost:5000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJSDoc(options);
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+app.use(morgan("dev"));
 
-const PORT = 5000;
-
-app.get("/", async (req, res) => {
-  const users = await User.find();
-
-  res.status(200).json(users);
-});
-
-app.put("/update/:id", (req, res) => {
-  const id = req.params.id;
-
-  const userIndex = users.findIndex((user) => user.id == id);
-
-  if (userIndex === -1) {
-    return res.status(404).json("User not found");
-  }
-
-  users[userIndex].id = req.body.id;
-  users[userIndex].name = req.body.name;
-
-  res.status(200).json({ message: "User updated", data: { users } });
-});
-
-app.post("/post", async (req, res) => {
-  const user = await User.create(req.body);
-
-  console.log(user);
-
-  res.status(201).json({
-    data: user,
-    message: "User successfully created",
-  });
-});
-
-app.delete("/delete/:id", async (req, res) => {
-  const id = req.params.id;
-
-  const user = await User.findByIdAndDelete({ _id: id });
-
-  if (!user) {
-    return res.status(404).json("user not found");
-  }
-  res.status(200).json("success");
-});
+app.use("/AguraMarket", systemRouter);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.use("/uploads", express.static("product_images"));
 
 mongoose
-  .connect("mongodb://localhost:27017/firstApp")
-  .then(() => console.log("Db connected"))
-  .catch((err) => {
-    console.log(err);
+  .connect(process.env.DB_connect_devs)
+  .then((res) => {
+    console.log(`connected to mongo DB`);
+    app.listen(PORT, () =>
+      console.log(
+        `AguraMarket project is running on port http://localhost:${PORT}`
+      )
+    );
+  })
+  .catch((error) => {
+    console.log(error);
   });
-
-app.listen(PORT, () => {
-  console.log(`Our app is running on port https://localhost:${PORT}`);
-});
