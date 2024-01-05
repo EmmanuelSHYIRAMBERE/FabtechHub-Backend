@@ -1,7 +1,6 @@
-import { resetPasswordEmail } from "../../middleware";
-import { User } from "../../models";
-import { catchAsyncError, getToken, hashPwd } from "../../utility";
-import errorHandler from "../../utility/errorHandlerClass";
+import { User } from "../../model";
+import { catchAsyncError, getToken, hashPwd } from "../../utilities";
+import errorHandler from "../../utilities/errorHandlerClass";
 
 import crypto from "crypto";
 
@@ -32,8 +31,6 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
 
   user.otp = resetPasswordOTP;
   user.otpExpiry = generateOTP().expiresAt;
-
-  resetPasswordEmail(user.email, user.fullNames, resetPasswordOTP);
 
   await user.save({ validateBeforeSave: false });
 

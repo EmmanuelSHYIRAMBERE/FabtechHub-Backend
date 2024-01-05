@@ -1,7 +1,7 @@
-import { Building, User } from "../../models";
-import { comparePwd, getToken } from "../../utility";
-import { catchAsyncError } from "../../utility";
-import errorHandler from "../../utility/errorHandlerClass";
+import { User } from "../../model";
+import { comparePwd, getToken } from "../../utilities";
+import { catchAsyncError } from "../../utilities";
+import errorHandler from "../../utilities/errorHandlerClass";
 
 export const logIn = catchAsyncError(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
@@ -14,19 +14,6 @@ export const logIn = catchAsyncError(async (req, res, next) => {
     return next(
       new errorHandler(`user with this email not found, try others`, 404)
     );
-  }
-
-  let buildingName = "";
-  let image = "";
-
-  if (user?.role === "manager") {
-    const building = await Building.findOne({ managerEmail: req.body.email });
-
-    buildingName = building.buildingName;
-    image = building.profilePicture;
-  } else {
-    buildingName = undefined;
-    image = undefined;
   }
 
   let isPwdMatch = await comparePwd(req.body.password, user.password);
@@ -47,8 +34,6 @@ export const logIn = catchAsyncError(async (req, res, next) => {
       phoneNo: user.phoneNo,
       location: user.location,
       role: user.role,
-      buildingName,
-      image,
     },
   });
 });

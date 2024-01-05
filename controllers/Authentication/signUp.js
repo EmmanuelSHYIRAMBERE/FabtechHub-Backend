@@ -1,8 +1,7 @@
-import { hashPwd } from "../../utility";
-import { User } from "../../models";
-import { sendEmail } from "../../middleware";
-import { catchAsyncError } from "../../utility";
-import errorHandler from "../../utility/errorHandlerClass";
+import { hashPwd } from "../../utilities";
+import { User } from "../../model";
+import { catchAsyncError } from "../../utilities";
+import errorHandler from "../../utilities/errorHandlerClass";
 
 export const signUp = catchAsyncError(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
@@ -21,8 +20,6 @@ export const signUp = catchAsyncError(async (req, res, next) => {
   req.body.password = hashedPwd;
 
   let newUser = await User.create(req.body);
-
-  sendEmail(req.body.email, req.body.fullNames);
 
   res.status(201).json({
     message: "user registerd successfully.",

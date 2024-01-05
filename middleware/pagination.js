@@ -1,5 +1,5 @@
-import { catchAsyncError } from "../utility";
-import errorHandler from "../utility/errorHandlerClass";
+import { catchAsyncError } from "../utilities";
+import errorHandler from "../utilities/errorHandlerClass";
 
 export const paginatedResults = (model) => {
   return catchAsyncError(async (req, res, next) => {

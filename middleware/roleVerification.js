@@ -1,4 +1,4 @@
-import { User } from "../models";
+import { User } from "../model";
 
 export const admin = async (req, res, next) => {
   try {

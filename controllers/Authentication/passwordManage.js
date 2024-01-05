@@ -1,6 +1,6 @@
-import { catchAsyncError, comparePwd, hashPwd } from "../../utility";
-import { User } from "../../models";
-import errorHandler from "../../utility/errorHandlerClass";
+import { User } from "../../model";
+import { catchAsyncError, comparePwd, hashPwd } from "../../utilities";
+import errorHandler from "../../utilities/errorHandlerClass";
 
 export const changePwd = catchAsyncError(async (req, res, next) => {
   const { existingPassword, newPassword } = req.body;
