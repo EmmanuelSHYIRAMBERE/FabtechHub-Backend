@@ -3,35 +3,35 @@ import mongoose from "mongoose";
 const productSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: false,
   },
   url: {
     type: String,
-    required: true,
+    required: false,
   },
   thumbnailUrl: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
     type: String,
-    required: true,
+    required: false,
   },
   categoryId: {
     type: String,
-    required: true,
+    required: false,
   },
   userId: {
     type: String,
-    required: true,
+    required: false,
   },
   Longitude: {
     type: String,
-    required: true,
+    required: false,
   },
   Latitude: {
     type: String,
-    required: true,
+    required: false,
   },
   dateCreated: {
     type: Date,
