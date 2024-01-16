@@ -1,7 +1,6 @@
 import { catchAsyncError } from "../../utilities";
 import errorHandler from "../../utilities/errorHandlerClass";
 import { Product } from "../../model";
-import { deleteAllDocuments } from "../Authentication/deleteMany";
 
 export const getAllProducts = catchAsyncError(async (req, res, next) => {
   const products = await Product.find();
@@ -19,8 +18,6 @@ export const getAllProducts = catchAsyncError(async (req, res, next) => {
     userId: product.userId,
     location: product.location,
   }));
-
-  await deleteAllDocuments();
 
   res.status(200).json(formattedProducts);
 });
