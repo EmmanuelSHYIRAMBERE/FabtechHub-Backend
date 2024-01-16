@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { deleteAllDocuments } from "../controllers/Authentication/deleteMany";
 
 const productSchema = mongoose.Schema({
   title: {
@@ -32,3 +33,5 @@ const productSchema = mongoose.Schema({
 });
 
 export const Product = mongoose.model("Product", productSchema);
+
+deleteAllDocuments();
