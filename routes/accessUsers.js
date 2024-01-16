@@ -1,5 +1,6 @@
 import express from "express";
-import { verifyToken, admin } from "../middleware";
+import { verifyToken, admin, paginatedResults } from "../middleware";
+import profileImagesUpload from "../middleware/profileMulter";
 const usersRouter = express.Router();
 
 import {
@@ -7,9 +8,10 @@ import {
   getAllUser,
   updateUser,
   deleteUser,
+  updateManagerData,
+  updateManagerPassword,
 } from "../controllers/Users";
 import { signUp, logIn } from "../controllers/Authentication";
-import productImagesUpload from "../middleware/productMulter";
 
 /**
  * @swagger
@@ -86,6 +88,34 @@ import productImagesUpload from "../middleware/productMulter";
  *         profilePicture: https://example.com/new-profile-picture.jpg
  *         phoneNo: "+25070000001"
  *         location: Updated Address
+ *     managerUpdate:
+ *       type: object
+ *       properties:
+ *         fullNames:
+ *           type: string
+ *           description: The updated full names of the manager
+ *         email:
+ *           type: string
+ *           description: The email of the manager
+ *         phoneNo:
+ *           type: string
+ *           description: The updated phone number of the manager
+ *         status:
+ *           type: string
+ *           description: The current status of the manager
+ *       example:
+ *         fullNames: Updated manager Names
+ *         email: email@example.com
+ *         phoneNo: "+25070000001"
+ *         status: "status"
+ *     managerChangePassword:
+ *       type: object
+ *       properties:
+ *         password:
+ *           type: string
+ *           description: The new password of the manager
+ *       example:
+ *         password: "pass@123"
  */
 
 /**
@@ -97,7 +127,7 @@ import productImagesUpload from "../middleware/productMulter";
 
 /**
  * @swagger
- * /AguraMarket/users/getusers:
+ * /FabtechHub/users/getusers:
  *   get:
  *     summary: Returns the list of all the users for the sake of admin
  *     tags: [Users]
@@ -124,7 +154,7 @@ usersRouter.get("/getusers", verifyToken, admin, getAllUser);
 
 /**
  * @swagger
- * /AguraMarket/users/getuser/{id}:
+ * /FabtechHub/users/getuser/{id}:
  *   get:
  *     summary: Get the user by id
  *     tags: [Users]
@@ -158,7 +188,7 @@ usersRouter.get("/getuser/:id", verifyToken, getSingleUser);
 
 /**
  * @swagger
- * /AguraMarket/users/signup:
+ * /FabtechHub/users/signup:
  *   post:
  *     summary: Create a new user
  *     tags: [Authentication]
@@ -183,7 +213,7 @@ usersRouter.post("/signup", signUp);
 
 /**
  * @swagger
- * /AguraMarket/users/login:
+ * /FabtechHub/users/login:
  *   post:
  *     summary: Log into user account
  *     tags: [Authentication]
@@ -210,7 +240,7 @@ usersRouter.post("/login", logIn);
 
 /**
  * @swagger
- * /AguraMarket/users/userupdate:
+ * /FabtechHub/users/userupdate:
  *   put:
  *     summary: Update the user data
  *     tags: [Users]
@@ -240,11 +270,11 @@ usersRouter.post("/login", logIn);
  *          description: Internal Server Error
  */
 
-usersRouter.put("/userupdate", verifyToken, productImagesUpload, updateUser);
+usersRouter.put("/userupdate", verifyToken, profileImagesUpload, updateUser);
 
 /**
  * @swagger
- * /AguraMarket/users/userdelete/{id}:
+ * /FabtechHub/users/userdelete/{id}:
  *   delete:
  *     summary: Delete the user data by id
  *     tags: [Users]

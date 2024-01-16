@@ -1,14 +1,13 @@
 import express from "express";
-import authenticate from "./aauthentication";
+
+import contactsRouter from "./Contacts";
 import errorHandler from "../utilities/errorHandlerClass";
 import { globalErrorController } from "../controllers/Errors";
-import productsRouter from "./product";
 import usersRouter from "./accessUsers";
 
 const systemRouter = express.Router();
 
-systemRouter.use("/password", authenticate);
-systemRouter.use("/products", productsRouter);
+systemRouter.use("/contacts", contactsRouter);
 systemRouter.use("/users", usersRouter);
 
 systemRouter.all("*", (req, res, next) => {
