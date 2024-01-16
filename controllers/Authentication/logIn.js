@@ -33,6 +33,7 @@ export const logIn = catchAsyncError(async (req, res, next) => {
       fullNames: user.fullNames,
       phoneNo: user.phoneNo,
       location: user.location,
+      expoPushToken: user.expoPushToken,
       role: user.role,
     },
   });

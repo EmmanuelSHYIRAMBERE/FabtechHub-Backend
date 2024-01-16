@@ -3,19 +3,37 @@ import cloudinary from "../../utilities/cloudinary";
 import { Product } from "../../model/productModel.js";
 
 export const addNewProduct = catchAsyncError(async (req, res, next) => {
-  const url = await cloudinary.uploader.upload(req.files["url"][0].path);
-  const thumbnailUrl = await cloudinary.uploader.upload(
-    req.files["thumbnailUrl"][0].path
-  );
+  const productImagesArray = [];
+
+  if (req.files["images"]) {
+    for (let index = 0; index < req.files["images"].length; index++) {
+      const image = req.files["images"][index];
+      const uploadedImage = await cloudinary.uploader.upload(image.path);
+      const imageUrl = uploadedImage.secure_url;
+
+      if (index === 0) {
+        productImagesArray.push({ url: imageUrl });
+      } else if (index === 1) {
+        productImagesArray[0].thumbnailUrl = imageUrl;
+      }
+    }
+  }
 
   const product = await Product.create({
     ...req.body,
-    url: url.secure_url,
-    thumbnailUrl: thumbnailUrl.secure_url,
+    images: productImagesArray.length > 0 ? productImagesArray : null,
   });
 
   return res.status(201).json({
     status: "A new product added successfully",
-    product,
+    product: {
+      id: product._id,
+      title: product.title,
+      images: productImagesArray,
+      price: product.price,
+      categoryId: product.categoryId,
+      userId: product.userId,
+      location: product.location,
+    },
   });
 });

@@ -5,12 +5,8 @@ const productSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  url: {
-    type: String,
-    required: false,
-  },
-  thumbnailUrl: {
-    type: String,
+  images: {
+    type: Array,
     required: false,
   },
   price: {
@@ -25,11 +21,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  Longitude: {
-    type: String,
-    required: false,
-  },
-  Latitude: {
+  location: {
     type: String,
     required: false,
   },

@@ -12,49 +12,46 @@ const productsRouter = express.Router();
  *       type: object
  *       required:
  *         - title
- *         - url
- *         - thumbnailUrl
+ *         - images
  *         - price
  *         - categoryId
  *         - userId
- *         - Longitude
- *         - Latitude
+ *         - location
  *       properties:
  *         title:
  *           type: string
  *           description: The title of the product
- *         url:
- *           type: string
- *           format: binary
- *           description: The product image url
- *         thumbnailUrl:
- *           type: string
- *           format: binary
- *           description: The product image thumbnailUrl
+ *           example: "Red jacket"
+ *         images:
+ *           type: array
+ *           items:
+ *             type: string
+ *             format: binary
+ *           description: The product images (file upload)
+ *           example: ["url:jacket.jpg", "thumbNailUrl"]
  *         price:
  *           type: string
  *           description: The price of the product
+ *           example: "100"
  *         categoryId:
  *           type: string
  *           description: The category id of the product
+ *           example: "5"
  *         userId:
  *           type: string
  *           description: The user id of the product
- *         Longitude:
+ *           example: "1"
+ *         location:
  *           type: string
- *           description: The Longitude of the user location
- *         Latitude:
- *           type: string
- *           description: The Latitude of the user location
+ *           description: The user latitude and longitude
+ *           example: "-1.9706° S,30.0474° E"
  *       example:
  *         title: "Red jacket"
- *         url: "jacket.jpg"
- *         thumbnailUrl: "jacket.jpg"
- *         price: 100
- *         categoryId: 5
- *         userId: 1
- *         Longitude: "30.0474° E"
- *         Latitude: "-1.9706° S"
+ *         images: ["url:jacket.jpg", "thumbNailUrl"]
+ *         price: "100"
+ *         categoryId: "5"
+ *         userId: "1"
+ *         location: "-1.9706° S,30.0474° E"
  */
 
 /**
@@ -78,7 +75,7 @@ const productsRouter = express.Router();
  *                   $ref: '#/components/schemas/products'
  *
  *     responses:
- *       200:
+ *       201:
  *          description: The product created successfully
  *          content:
  *             multipart/form-data:

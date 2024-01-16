@@ -12,19 +12,11 @@ export const getAllProducts = catchAsyncError(async (req, res, next) => {
   const formattedProducts = products.map((product) => ({
     id: product._id,
     title: product.title,
-    images: [
-      {
-        url: product.url,
-        thumbnailUrl: product.thumbnailUrl,
-      },
-    ],
+    images: product.images,
     price: product.price,
     categoryId: product.categoryId,
     userId: product.userId,
-    location: {
-      latitude: product.Latitude,
-      longitude: product.Longitude,
-    },
+    location: product.location,
   }));
 
   res.status(200).json(formattedProducts);
