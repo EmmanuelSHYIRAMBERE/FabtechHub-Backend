@@ -26,6 +26,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  description: {
+    type: String,
+    required: false,
+  },
   dateCreated: {
     type: Date,
     default: Date.now,
@@ -33,5 +37,3 @@ const productSchema = mongoose.Schema({
 });
 
 export const Product = mongoose.model("Product", productSchema);
-
-deleteAllDocuments();

@@ -17,6 +17,7 @@ const productsRouter = express.Router();
  *         - categoryId
  *         - userId
  *         - location
+ *         - description
  *       properties:
  *         title:
  *           type: string
@@ -45,6 +46,10 @@ const productsRouter = express.Router();
  *           type: string
  *           description: The user latitude and longitude
  *           example: "-1.9706° S,30.0474° E"
+ *         description:
+ *           type: string
+ *           description: The product description
+ *           example: "This is a good product you can afford easily."
  *       example:
  *         title: "Red jacket"
  *         images: ["url:jacket.jpg", "thumbNailUrl"]
@@ -52,6 +57,7 @@ const productsRouter = express.Router();
  *         categoryId: "5"
  *         userId: "1"
  *         location: "-1.9706° S,30.0474° E"
+ *         description: "This is a good product you can afford easily."
  */
 
 /**

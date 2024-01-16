@@ -2,20 +2,14 @@ import { Product } from "../../model";
 
 export async function deleteAllDocuments() {
   try {
-    await Product.deleteMany({});
-    // await Cars.deleteMany({});
-    // await Contact.deleteMany({});
-    // await Floors.deleteMany({});
-    // await Notification.deleteMany({});
-    // await Building.deleteMany({});
-    // await Parkings.deleteMany({});
-    // await replyContact.deleteMany({});
-    // await User.deleteMany({});
+    const result = await Product.deleteMany({});
 
-    console.log("Successfully data deleted");
+    if (result.deletedCount > 0) {
+      console.log(`Successfully deleted ${result.deletedCount} documents`);
+    } else {
+      console.log("No documents to delete");
+    }
   } catch (error) {
-    console.log("Error", error);
+    console.log("Error:", error);
   }
 }
-
-deleteAllDocuments();
