@@ -8,7 +8,6 @@ import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import systemRouter from "./routes";
 
-
 const app = express();
 
 const PORT = process.env.PORT;
@@ -24,7 +23,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:7700",
+        url: "https://fabtechhub.onrender.com/",
       },
     ],
   },

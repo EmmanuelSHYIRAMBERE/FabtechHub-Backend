@@ -12,15 +12,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  fileFilter: function (req, file, callback) {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-      callback(null, true);
-    } else {
-      callback(null, false);
-    }
-  },
 });
 
-const productImagesUpload = upload.fields([{ name: "images", maxCount: 3 }]);
+const fileUpload = upload.fields([{ name: "images", maxCount: 3 }]);
 
-export default productImagesUpload;
+export default fileUpload;
