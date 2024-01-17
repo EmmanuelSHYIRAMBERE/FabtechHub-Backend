@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export const sendEmail = (userEmail, userNames) => {
+export const sendEmail = (userEmail, userNames, userMessage) => {
   let config = {
     service: "gmail",
     auth: {
@@ -15,16 +15,15 @@ export const sendEmail = (userEmail, userNames) => {
 
   let message = {
     from: process.env.Email,
-    to: userEmail,
-    subject:
-      "Welcome to Smart Parking System - Your Gateway to Effortless Parking",
+    to: "baudoinvicbolingo@gmail.com",
+    subject: "Fab Tech Hub Contact Notification",
 
     html: `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Smart Parking System</title>
+    <title>Fab Tech Hub Contact Notification</title>
 
     <style>
       body {
@@ -114,37 +113,31 @@ export const sendEmail = (userEmail, userNames) => {
   </head>
   <body>
     <div class="header">
-      <a href="https://smart-parking-system.com">
+      <a href="#">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWtvKgAkMj_gzrRKUkaonxClNNp3evQwwdmPox9nDg&s"
-          alt="Smart Parking System logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4EdirpDUe_lsyP317I8xMmLD11zG4eFfq7O4kgDYlFXxeWgpKrJpk60aEQ2IGPdd93io&usqp=CAU"
+          alt="FabTechHub logo"
         />
       </a>
-      <h1>Smart Parking System</h1>
+      <h1>Fab Tech Hub</h1>
     </div>
     <div class="content">
+
       <h2>
-        Your Parking Experience Begins,<br />
-        Welcome to Smart Parking System!
-      </h2>
+         A user sent a message contains the following details:
+        
+      </h2><br />
       <p>
-        Dear ${userNames ? userNames.split(" ")[0] : "Valued Customer"},
-        <br /><br />
-        We're thrilled to welcome you to Smart Parking System, your solution to
-        hassle-free parking. Your decision to join us marks the beginning of a
-        journey where finding a parking spot is just a click away.
-        <br /><br />Reserve your parking spot today and experience the
-        convenience!
+        Name of User: ${userNames},
+      </p><br />
+      <p>
+        Email of User: ${userEmail},
+      </p><br />
+      <p>
+        Message Body: ${userMessage},
       </p><br />
     </div><br />
     <div class="footer">
-      Thank you for choosing Smart Parking System to simplify your parking
-      experience. We look forward to providing you with seamless parking
-      solutions that enhance your daily commute. Explore the features and
-      functionalities of our platform. If you have any questions or need
-      assistance, feel free to reach out. We are here to make your parking
-      experience as efficient and enjoyable as possible.<br /><br />
-
       Best regards,
     </div>
   </body>
