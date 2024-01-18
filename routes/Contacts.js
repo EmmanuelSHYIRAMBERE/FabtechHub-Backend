@@ -96,8 +96,6 @@ contactsRouter.post("/makecontact", makeContact);
  *   get:
  *     summary: Returns the all contacts data
  *     tags: [Contacts]
- *     security:
- *       - BearerAuth: []
  *     responses:
  *       200:
  *          description: The success
@@ -150,7 +148,6 @@ contactsRouter.put("/updatecontact/:id", updateContact);
  */
 
 contactsRouter.delete("/deletecontact/:id", deleteContact);
-
 
 contactsRouter.post("/replycontact/:id", replyContacted);
 

@@ -21,10 +21,6 @@ const contactSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  file: {
-    type: String,
-    required: true,
-  },
   yearsOfExperience: {
     type: String,
     required: true,
@@ -32,6 +28,10 @@ const contactSchema = mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
+    default: "Waiting",
   },
   dateSent: {
     type: Date,
