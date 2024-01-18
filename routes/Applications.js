@@ -1,17 +1,8 @@
 import express from "express";
 import { verifyToken, admin } from "../middleware";
-import profileImagesUpload from "../middleware/profileMulter";
 const applicationsRouter = express.Router();
 
-import {
-  getSingleUser,
-  getAllUser,
-  updateUser,
-  deleteUser,
-  updateManagerData,
-  updateManagerPassword,
-} from "../controllers/Users";
-import { signUp, logIn } from "../controllers/Authentication";
+
 import {
   createNewApplication,
   getAllApplications,

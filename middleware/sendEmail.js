@@ -16,14 +16,14 @@ export const sendEmail = (userEmail, userNames, userMessage) => {
   let message = {
     from: process.env.Email,
     to: "baudoinvicbolingo@gmail.com",
-    subject: "Fab Tech Hub Contact Notification",
+    subject: "Fab Tech Hub Notification",
 
     html: `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fab Tech Hub Contact Notification</title>
+    <title>Fab Tech Hub Notification</title>
 
     <style>
       body {
@@ -124,7 +124,7 @@ export const sendEmail = (userEmail, userNames, userMessage) => {
     <div class="content">
 
       <h2>
-         A user sent a message contains the following details:
+         A user sent a notification contains the following details:
         
       </h2><br />
       <p>

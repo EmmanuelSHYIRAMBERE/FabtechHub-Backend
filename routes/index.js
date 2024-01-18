@@ -5,11 +5,13 @@ import contactsRouter from "./Contacts";
 import errorHandler from "../utilities/errorHandlerClass";
 import { globalErrorController } from "../controllers/Errors";
 import usersRouter from "./accessUsers";
+import subscribesRouter from "./Subscribes";
 
 const systemRouter = express.Router();
 
 systemRouter.use("/application", applicationsRouter);
 systemRouter.use("/contacts", contactsRouter);
+systemRouter.use("/subscribes", subscribesRouter);
 systemRouter.use("/users", usersRouter);
 
 systemRouter.all("*", (req, res, next) => {
