@@ -23,7 +23,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:7700",
+        url: "https://fabtechhub.onrender.com",
       },
     ],
   },
