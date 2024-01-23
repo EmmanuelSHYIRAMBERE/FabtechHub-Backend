@@ -119,14 +119,9 @@ export const sendEmail = (userEmail, userNames, userMessage) => {
           alt="FabTechHub logo"
         />
       </a>
-      <h1>Fab Tech Hub</h1>
     </div>
     <div class="content">
-
-      <h2>
-         A user sent a notification contains the following details:
-        
-      </h2><br />
+<br />
       <p>
         Name of User: ${userNames},
       </p><br />
